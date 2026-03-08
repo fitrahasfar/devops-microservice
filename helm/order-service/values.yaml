@@ -1,7 +1,7 @@
 replicaCount: 1
 
 image:
-  repository: order-service
+  repository: ghcr.io/fitrahasfar/devops-microservice/order-service
   tag: latest
   pullPolicy: Never
 
