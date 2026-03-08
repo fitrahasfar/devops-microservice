@@ -1,0 +1,63 @@
+services:
+  postgres-user:
+    image: postgres:15
+    container_name: postgres-user
+    environment:
+      POSTGRES_PASSWORD: postgres
+      POSTGRES_DB: userdb
+    ports:
+      - "5433:5432"
+    networks:
+      - devops-network
+
+  postgres-order:
+    image: postgres:15
+    container_name: postgres-order
+    environment:
+      POSTGRES_PASSWORD: postgres
+      POSTGRES_DB: orderdb
+    ports:
+      - "5434:5432"
+    networks:
+      - devops-network
+
+  redis:
+    image: redis:7
+    container_name: redis
+    ports:
+      - "6379"
+    networks:
+      - devops-network
+
+  user-service:
+    build:
+      context: ./services/user-service
+    container_name: user-service
+    env_file:
+      - ./services/user-service/.env
+    ports:
+      - "8000:8000"
+    depends_on:
+      - postgres-user
+      - redis
+    networks:
+      - devops-network
+
+  order-service:
+    build:
+      context: ./services/order-service
+    container_name: order-service
+    env_file:
+      - ./services/order-service/.env
+    ports:
+      - "8001:8000"
+    depends_on:
+      - postgres-order
+      - redis
+      - user-service
+    networks:
+      - devops-network
+
+networks:
+  devops-network:
+    driver: bridge

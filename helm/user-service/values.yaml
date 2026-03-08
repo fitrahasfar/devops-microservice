@@ -1,0 +1,14 @@
+replicaCount: 1
+
+image:
+  repository: user-service
+  tag: latest
+  pullPolicy: Never
+
+service:
+  type: ClusterIP
+  port: 8000
+
+env:
+  DATABASE_URL: postgresql://postgres:postgres@postgres-user:5432/userdb
+  REDIS_URL: redis://redis:6379

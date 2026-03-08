@@ -1,0 +1,16 @@
+replicaCount: 1
+
+image:
+  repository: order-service
+  tag: latest
+  pullPolicy: Never
+
+service:
+  type: ClusterIP
+  port: 8000
+  targetPort: 8000
+
+env:
+  DATABASE_URL: postgresql://postgres:postgres@postgres-order:5432/orderdb
+  REDIS_URL: redis://redis:6379
+  USER_SERVICE_URL: http://user-service:8000

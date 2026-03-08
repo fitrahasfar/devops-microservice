@@ -1,0 +1,8 @@
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: app-config
+  namespace: devops
+data:
+  USER_DB_NAME: userdb
+  ORDER_DB_NAME: orderdb
