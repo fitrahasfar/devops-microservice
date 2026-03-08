@@ -24,7 +24,7 @@ jobs:
       # Build order-service image
       - name: Build user-service image
         run: |
-          docker build -t ghcr.io/{{ github.reposity }}/user-service:latest
+          docker build -t ghcr.io/{{ github.reposity }}/user-service:latest ./services/user-service
 
       # Build Docker image
       - name: Push user-service image
@@ -46,7 +46,7 @@ jobs:
 
       - name: Build user-service image
         run: |
-          docker build -t ghcr.io/${{ github.repository }}/order-service:latest
+          docker build -t ghcr.io/${{ github.repository }}/order-service:latest ./services/order-service
 
       - name: Push order-service image
         run: |
