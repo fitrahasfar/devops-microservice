@@ -4,7 +4,9 @@ on:
   push:
     branches:
       - main
-
+permissions:
+  contents: read
+  packages: write
 jobs:
   build-user-service:
     runs-on: ubuntu-latest
@@ -24,7 +26,7 @@ jobs:
       # Build order-service image
       - name: Build user-service image
         run: |
-          docker build -t ghcr.io/{{ github.reposity }}/user-service:latest ./services/user-service
+          docker build -t ghcr.io/${{ github.reposity }}/user-service:latest ./services/user-service
 
       # Build Docker image
       - name: Push user-service image
